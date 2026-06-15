@@ -46,6 +46,8 @@ app.whenReady().then(() => {
   setInterval(() => procesarRecomendaciones().catch(() => {}), 60000);
 });
 
+
+
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
@@ -56,7 +58,7 @@ app.on('activate', () => {
 
 async function importarCSVAutomatico() {
   try {
-    const lecturas = await AdaptadorCSV.leer('datos/sensores.csv');
+    const lecturas = await AdaptadorCSV.leer(path.join(__dirname, '..', 'datos', 'sensores.csv'));
     const porParcela = {};
     for (const l of lecturas) {
       if (!porParcela[l.parcelaId]) porParcela[l.parcelaId] = [];

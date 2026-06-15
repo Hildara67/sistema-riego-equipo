@@ -4,7 +4,7 @@
   "description": "Sistema Inteligente de Control de Riego - Fase 4 Implementación",
   "main": "src/main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "node node_modules/electron/cli.js .",
     "dev": "nodemon --exec electron .",
     "build": "electron-builder --win",
     "docs": "jsdoc src -d docs/jsdoc",
