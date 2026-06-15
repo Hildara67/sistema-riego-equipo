@@ -7,7 +7,7 @@
     "start": "node node_modules/electron/cli.js .",
     "dev": "nodemon --exec electron .",
     "build": "electron-builder --win",
-    "docs": "jsdoc src -d docs/jsdoc",
+    "docs": "jsdoc src -d docs/jsdoc"
 
   },
   "dependencies": {
