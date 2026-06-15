@@ -56,19 +56,16 @@ sudo apt install fonts-noto-color-emoji -y
 ```bash
 cp .env.example .env
 ```
-
+ 
 ## Ejecución
 ```bash
-# Modo escritorio (Electron) — requiere MariaDB:
 npm start
 ```
 
-Para probar solo el frontend sin base de datos:
-```bash
-npm run start:web
-```
-Luego abre `http://localhost:3000` en el navegador.  
-Usa los usuarios de prueba: `admin / admin123` (SUPERVISOR) u `operador1 / operador123` (OPERADOR).
+## Credenciales de prueba
+
+Supervisor: `admin` / `admin123`
+Operador: `operador1` / `operador123`
 
 ## Estructura del Proyecto 
 
@@ -91,7 +88,7 @@ Usa los usuarios de prueba: `admin / admin123` (SUPERVISOR) u `operador1 / opera
 │   ├── *.html                   #   9 pantallas (login, dashboard, captura, etc.)
 │   ├── 📁 css/
 │   │   └── estilos.css          #     Hoja de estilos principal
-│   ├── 📁 js/                   #   12 scripts
+│   ├── 📁 js/                   #   11 scripts
 │   │   ├── login.js             #     Autenticación
 │   │   ├── dashboard.js         #     Panel de control
 │   │   ├── captura.js           #     Captura de lecturas
@@ -103,7 +100,6 @@ Usa los usuarios de prueba: `admin / admin123` (SUPERVISOR) u `operador1 / opera
 │   │   ├── usuarios.js          #     Gestión de usuarios
 │   │   ├── reportes.js          #     Reportes y KPIs
 │   │   ├── inactividad.js       #     Control de sesión
-│   │   ├── mock-api.js          #     API mock (modo web demo)
 │   │   └── renderer.js          #     Puente Electron ↔ frontend
 ├── 📁 docs/
 │   └── init_db.sql              #   Script de base de datos
@@ -111,10 +107,8 @@ Usa los usuarios de prueba: `admin / admin123` (SUPERVISOR) u `operador1 / opera
 │   └── sensores.csv             #   Datos de prueba
 ├── 📁 scripts/
 │   └── backup.js                #   Backup de base de datos
-├── server.js                    # Servidor Express (modo web)
 ├── package.json                 # Dependencias y scripts
 ├── electron-builder.yml          # Configuración de empaquetado
-├── render.yaml                  # Despliegue en Render
 ├── .env.example                 # Variables de entorno
 ├── logo*.png                    # Logos del proyecto
 └── LICENSE                      # Licencia MIT
