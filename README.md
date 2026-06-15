@@ -19,6 +19,12 @@ Sistema para automatizar la gestión de riego agrícola usando el método FAO-56
 
 ## Instalación 
 
+### Alternativa rápida (automatizada)
+```bash
+bash scripts/setup.sh
+```
+Esto instala Node.js 20, MariaDB, librerías necesarias, configura la base de datos y las dependencias del proyecto automáticamente.
+
 ### 1. Clonar e instalar dependencias
 ```bash 
 git clone https://github.com/Hildara67/sistema-riego-equipo.git
