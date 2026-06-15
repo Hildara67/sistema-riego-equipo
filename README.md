@@ -29,7 +29,7 @@ npm install
 ### 2. Configurar MariaDB
 ```bash
 # Instalar MariaDB
-sudo apt install mariadb-server fonts-noto-color-emoji -y
+sudo apt install mariadb-server -y
 
 # Iniciar el servicio
 sudo service mariadb start
@@ -44,27 +44,31 @@ sudo mysql riego_db < docs/init_db.sql
 sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY ''; FLUSH PRIVILEGES;"
 ```
 
-### 3. Configurar variables de entorno
+### 3. Fuente para emojis
+La interfaz usa emojis como indicadores de estado (🟢 conectado, 🔴 desconectado, etc.).  
+En WSL/Linux es necesario instalarlos para que se vean correctamente:
+
+```bash
+sudo apt install fonts-noto-color-emoji -y
+```
+
+### 4. Configurar variables de entorno
 ```bash
 cp .env.example .env
 ```
 
 ## Ejecución
 ```bash
-# Modo escritorio (Electron):
+# Modo escritorio (Electron) — requiere MariaDB:
 npm start
 ```
 
-Si solo se quiere probar el frontend sin base de datos:
+Para probar solo el frontend sin base de datos:
 ```bash
 npm run start:web
 ```
-
-## Credenciales de prueba
-(disponibles solo en modo web demo)
-
-Supervisor: admin / admin123 
-Operador: operador1 / operador123 
+Luego abre `http://localhost:3000` en el navegador.  
+Usa los usuarios de prueba: `admin / admin123` (SUPERVISOR) u `operador1 / operador123` (OPERADOR).
 
 ## Estructura del Proyecto 
 
@@ -99,7 +103,7 @@ Operador: operador1 / operador123
 │   │   ├── usuarios.js          #     Gestión de usuarios
 │   │   ├── reportes.js          #     Reportes y KPIs
 │   │   ├── inactividad.js       #     Control de sesión
-│   │   ├── mock-api.js          #     API mock (modo demo)
+│   │   ├── mock-api.js          #     API mock (modo web demo)
 │   │   └── renderer.js          #     Puente Electron ↔ frontend
 ├── 📁 docs/
 │   └── init_db.sql              #   Script de base de datos
@@ -114,4 +118,3 @@ Operador: operador1 / operador123
 ├── .env.example                 # Variables de entorno
 ├── logo*.png                    # Logos del proyecto
 └── LICENSE                      # Licencia MIT
-```
