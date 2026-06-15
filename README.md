@@ -29,7 +29,7 @@ npm install
 ### 2. Configurar MariaDB
 ```bash
 # Instalar MariaDB
-sudo apt install mariadb-server -y
+sudo apt install mariadb-server fonts-noto-color-emoji -y
 
 # Iniciar el servicio
 sudo service mariadb start
