@@ -1,15 +1,35 @@
 
 # STYRAX — Sistema Inteligente de Control de Riego  
 
-Sistema para automatizar la gestión de riego agrícola usando el método FAO-56.  
+Sistema de escritorio para automatizar la gestión de riego agrícola usando el método FAO-56.  
+
+## Objetivos
+
+- Automatizar el cálculo de evapotranspiración (ETo/ETc) con datos climáticos reales
+- Generar recomendaciones de riego precisas basadas en umbrales configurables
+- Proveer una interfaz gráfica intuitiva para el monitoreo y control de parcelas
+- Almacenar y consultar el historial de lecturas y recomendaciones
+- Facilitar la toma de decisiones mediante un panel de control con semáforo de estado
+
+## Tecnologías utilizadas
+
+| Tecnología | Propósito |
+|------------|-----------|
+| Electron 28 | Aplicación de escritorio multiplataforma |
+| Node.js 20 | Entorno de ejecución backend |
+| MariaDB 10 | Base de datos relacional |
+| MySQL2 | Conexión a base de datos |
+| Axios | Consultas a API NASA POWER |
+| dotenv | Variables de entorno |
 
 ## Características 
 - Captura de lecturas de sensores (humedad, temperatura, HR)
 - Cálculo de evapotranspiración (ETc) con método FAO-56
 - Balance hídrico automatizado
-- Generación de recomendaciones de riego
+- Generación de recomendaciones de riego cada 60 segundos
 - Panel de control con semáforo de estado
-- Roles: OPERADOR y SUPERVISOR
+- Importación automática de CSV cada 30 segundos
+- Roles: OPERADOR (captura) y SUPERVISOR (administración)
 
 ## Requisitos 
 - Node.js 18+
@@ -73,6 +93,21 @@ npm start
 Supervisor: `admin` / `admin123`
 Operador: `operador1` / `operador123`
 
+## Flujo de trabajo
+
+Este proyecto utiliza **GitHub Flow**: ramas `feature/` desde `main`, Pull Requests para integración y merges directos.
+
+Ver [`docs/FLUJO_DE_TRABAJO.md`](docs/FLUJO_DE_TRABAJO.md) para más detalle.
+
+## Autores
+
+| Integrante | Contribución principal |
+|------------|----------------------|
+| Hildara | Backend (FAO-56, DAOs, Electron) |
+| Nicol | Frontend administración (parcelas, usuarios, configuración, auditoría) |
+| María | Frontend operativo (dashboard, captura, historial, recomendaciones) |
+| Danna | Reportes, logos, datos de prueba, script setup.sh |
+
 ## Estructura del Proyecto 
 
 ```
@@ -108,11 +143,17 @@ Operador: `operador1` / `operador123`
 │   │   ├── inactividad.js       #     Control de sesión
 │   │   └── renderer.js          #     Puente Electron ↔ frontend
 ├── 📁 docs/
-│   └── init_db.sql              #   Script de base de datos
+│   ├── init_db.sql              #   Script de base de datos
+│   ├── INFORME.md               #   Informe del proyecto
+│   ├── FLUJO_DE_TRABAJO.md      #   Documentación del flujo de trabajo
+│   └── ARQUITECTURA.md          #   Arquitectura del sistema
+├── 📁 tests/                    #   Pruebas unitarias
 ├── 📁 datos/
 │   └── sensores.csv             #   Datos de prueba
 ├── 📁 scripts/
 │   └── backup.js                #   Backup de base de datos
+├── REQUISITOS.md                # Requisitos detallados del sistema
+├── CONTRIBUTING.md              # Guía para contribuir al proyecto
 ├── package.json                 # Dependencias y scripts
 ├── electron-builder.yml          # Configuración de empaquetado
 ├── .env.example                 # Variables de entorno
