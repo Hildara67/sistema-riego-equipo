@@ -3,6 +3,8 @@ const loadingOverlay = document.getElementById('loadingOverlay');
 function mostrarCarga() { loadingOverlay.classList.add('show'); }
 function ocultarCarga() { loadingOverlay.classList.remove('show'); }
 
+// Verifica que el usuario tenga sesión activa y sea OPERADOR.
+// Si no hay sesión redirige al login; si es SUPERVISOR redirige a parcelas.
 function verificarSesion() {
   const usuario = JSON.parse(sessionStorage.getItem('usuario'));
   if (!usuario) {
@@ -23,6 +25,8 @@ document.getElementById('btnCerrarSesion').addEventListener('click', () => {
   window.location.href = 'index.html';
 });
 
+// Carga los indicadores del dashboard (totales del día): parcelas, lecturas,
+// estado óptimo, alertas activas y déficit detectado.
 async function cargarIndicadores() {
   try {
     const totalParcelas = await window.api.contarParcelas();

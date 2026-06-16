@@ -18,6 +18,10 @@ const RecomendacionDTO = require('./dto/recomendacion.dto');
 
 let mainWindow;
 
+// Crea la ventana principal del sistema con configuración de seguridad:
+// - contextIsolation: true  → el frontend no accede directamente a Node.js
+// - nodeIntegration: false  → no se requiere acceso a Node desde el HTML
+// - preload: renderer.js    → puente controlado entre backend y frontend
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1280,
@@ -40,6 +44,9 @@ function createWindow() {
   }
 }
 
+// Al iniciar la aplicación se crea la ventana y se programan dos tareas automáticas:
+// - importarCSVAutomatico cada 30s para cargar lecturas desde archivo CSV
+// - procesarRecomendaciones cada 60s para generar recomendaciones de riego
 app.whenReady().then(() => {
   createWindow();
   setInterval(importarCSVAutomatico, 30000);
@@ -56,6 +63,9 @@ app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) createWindow();
 });
 
+// Importa lecturas desde el archivo CSV de forma automática.
+// Las lecturas nuevas se agrupan por parcela y solo se insertan
+// las que aún no han sido importadas (evita duplicados).
 async function importarCSVAutomatico() {
   try {
     const lecturas = await AdaptadorCSV.leer(path.join(__dirname, '..', 'datos', 'sensores.csv'));

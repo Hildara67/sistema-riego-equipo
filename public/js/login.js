@@ -7,11 +7,13 @@ const btnIngresar = document.getElementById('btnIngresar');
 const errorMessage = document.getElementById('errorMessage');
 const togglePassword = document.getElementById('togglePassword');
 
+// Si no es modo demo (Electron real), se eliminan elementos decorativos
 if (!window.__ES_DEMO__) {
   document.querySelector('.login-home')?.remove();
   document.querySelector('.credential-hint')?.remove();
 }
 
+// Animación de entrada: muestra el logo 2.2s y luego aparece el formulario
 setTimeout(() => {
   intro.classList.add('fade-out');
   setTimeout(() => {
@@ -26,6 +28,7 @@ setTimeout(() => {
   }, 700);
 }, 2200);
 
+// Habilita el botón solo si usuario no está vacío y contraseña >= 8 caracteres
 function validarFormulario() {
   const valido = usuarioInput.value.trim().length > 0 && passwordInput.value.length >= 8;
   btnIngresar.disabled = !valido;
@@ -34,21 +37,26 @@ function validarFormulario() {
 usuarioInput.addEventListener('input', validarFormulario);
 passwordInput.addEventListener('input', validarFormulario);
 
+// Solo permite caracteres alfanuméricos en el nombre de usuario
 usuarioInput.addEventListener('input', function() {
   this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');
 });
 
+// Botón para mostrar/ocultar la contraseña
 togglePassword.addEventListener('click', function() {
   const type = passwordInput.type === 'password' ? 'text' : 'password';
   passwordInput.type = type;
 });
 
+// Si el backend (Electron) no cargó el puente API, muestra error
 if (!window.api) {
   errorMessage.textContent = 'Error cargando la aplicación. Intenta recargar la página.';
   errorMessage.classList.add('show');
   btnIngresar.disabled = true;
 }
 
+// Envío del formulario: llama al backend vía IPC (window.api.login)
+// Redirige a dashboard.html (OPERADOR) o parcelas.html (SUPERVISOR)
 form.addEventListener('submit', async function(e) {
   e.preventDefault();
   if (btnIngresar.disabled) return;
@@ -70,6 +78,7 @@ form.addEventListener('submit', async function(e) {
     if (result.success) {
       sessionStorage.setItem('usuario', JSON.stringify(result.usuario));
       const rol = result.usuario.rol;
+      // OPERADOR ve dashboard, SUPERVISOR ve gestión de parcelas
       if (rol === 'OPERADOR') {
         window.location.href = 'dashboard.html';
       } else {
