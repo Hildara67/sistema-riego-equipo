@@ -151,8 +151,9 @@ Ver [`docs/FLUJO_DE_TRABAJO.md`](docs/FLUJO_DE_TRABAJO.md) para más detalle.
 ├── 📁 datos/
 │   └── sensores.csv             #   Datos de prueba
 ├── 📁 scripts/
+│   ├── setup.sh                 #   Instalación automatizada
 │   └── backup.js                #   Backup de base de datos
-├── REQUISITOS.md                # Requisitos detallados del sistema
+├── REQUISITOS.txt               #   Requisitos detallados del sistema
 ├── CONTRIBUTING.md              # Guía para contribuir al proyecto
 ├── package.json                 # Dependencias y scripts
 ├── electron-builder.yml          # Configuración de empaquetado

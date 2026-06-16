@@ -1,54 +1,73 @@
-REQUISITOS — Sistema de Riego STYRAX
-=====================================
+REQUISITOS DEL SISTEMA
+======================
+STYRAX - Sistema Inteligente de Control de Riego
+=================================================
 
-Software necesario
+SOFTWARE NECESARIO
 ------------------
-- Node.js 18+    (https://nodejs.org)
-- npm 9+         (viene con Node.js)
-- MariaDB 10+    (https://mariadb.org)
-- Git 2.30+      (https://git-scm.com)
 
+Para ejecutar el sistema se requiere Node.js en su versión 18 o superior,
+el cual puede descargarse desde https://nodejs.org. npm en su versión 9 o
+superior viene incluido con Node.js. Se necesita MariaDB versión 10 o superior
+disponible en https://mariadb.org. Git versión 2.30 o superior es necesario
+para clonar el repositorio y gestionar el control de versiones.
 
-Sistema operativo
+SISTEMA OPERATIVO
 -----------------
-El proyecto fue desarrollado y probado en:
-- Windows 10/11 con WSL2 (recomendado) — Ubuntu 22.04
-- Linux nativo — Ubuntu 22.04+, Debian 11+, Fedora 38+
-- Windows nativo — Node.js y MariaDB directamente en Windows
-- macOS — no probado en produccion
 
+El proyecto fue desarrollado y probado en Windows 10 y 11 con WSL2 utilizando
+Ubuntu 22.04, que es el entorno recomendado para su ejecución. También funciona
+en Linux nativo con distribuciones como Ubuntu 22.04 o superior, Debian 11 o
+superior y Fedora 38 o superior. En Windows nativo se puede ejecutar instalando
+Node.js y MariaDB directamente, aunque no ha sido probado exhaustivamente en
+este entorno. En macOS solo se realizaron pruebas de desarrollo.
 
-Dependencias del sistema (WSL/Linux)
-------------------------------------
-  sudo apt install -y mariadb-server fonts-noto-color-emoji
+DEPENDENCIAS DEL SISTEMA (WSL/LINUX)
+-------------------------------------
 
+En sistemas Linux y WSL es necesario instalar MariaDB y las fuentes para
+emojis. Los comandos de instalación son:
 
-Dependencias de Node.js (se instalan con: npm install)
-------------------------------------------------------
-- electron      Entorno de escritorio
-- mysql2        Conexion a MariaDB
-- axios         Consultas a la API NASA POWER
-- csv-parser    Lectura de archivos CSV
-- dotenv        Variables de entorno
+sudo apt install -y mariadb-server fonts-noto-color-emoji
 
-Ver package.json para las versiones exactas.
+En Ubuntu 24.04 o superior, el paquete libasound2 fue renombrado a
+libasound2t64. El script de instalación automatizada (scripts/setup.sh)
+detecta esta diferencia y selecciona el paquete correcto automáticamente.
 
+DEPENDENCIAS DE NODE.JS
+------------------------
 
-Verificar instalacion
----------------------
-  node --version     Debe mostrar v18 o superior
-  npm --version      Debe mostrar 9 o superior
-  mysql --version    Debe mostrar 10 o superior
-  git --version      Debe mostrar 2.30 o superior
+Las dependencias se instalan automáticamente al ejecutar npm install. Las
+principales son electron como entorno de escritorio, mysql2 para la conexión
+a MariaDB, axios para consultar la API de NASA POWER, csv-parser para leer
+archivos CSV y dotenv para las variables de entorno. Las versiones exactas se
+encuentran en el archivo package.json del repositorio.
 
+VERIFICACION DE LA INSTALACION
+-------------------------------
 
-Espacio en disco
-----------------
-- Proyecto sin dependencias:  ~5 MB
-- Con node_modules:           ~250 MB
-- MariaDB + datos:            ~200 MB adicionales
+Para verificar que todo está instalado correctamente se deben ejecutar los
+siguientes comandos:
 
+node --version     Debe mostrar v18 o superior
+npm --version      Debe mostrar 9 o superior
+mysql --version   Debe mostrar 10 o superior
+git --version     Debe mostrar 2.30 o superior
 
-Instalacion rapida
-------------------
-  bash scripts/setup.sh
+ESPACIO EN DISCO
+-----------------
+
+El proyecto sin dependencias ocupa aproximadamente 5 megabytes. Con la
+carpeta node_modules el tamaño aumenta a unos 250 megabytes. MariaDB con
+los datos del sistema requiere aproximadamente 200 megabytes adicionales.
+
+INSTALACION RAPIDA
+-------------------
+
+Para una instalación automatizada ejecutar:
+
+bash scripts/setup.sh
+
+Este script instala Node.js 20 mediante nvm, instala MariaDB con las
+librerías necesarias, crea la base de datos e importa el esquema, configura
+las variables de entorno e instala las dependencias del proyecto.
