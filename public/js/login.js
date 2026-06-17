@@ -7,12 +7,6 @@ const btnIngresar = document.getElementById('btnIngresar');
 const errorMessage = document.getElementById('errorMessage');
 const togglePassword = document.getElementById('togglePassword');
 
-// Si no es modo demo (Electron real), se eliminan elementos decorativos
-if (!window.__ES_DEMO__) {
-  document.querySelector('.login-home')?.remove();
-  document.querySelector('.credential-hint')?.remove();
-}
-
 // Animación de entrada: muestra el logo 2.2s y luego aparece el formulario
 setTimeout(() => {
   intro.classList.add('fade-out');
