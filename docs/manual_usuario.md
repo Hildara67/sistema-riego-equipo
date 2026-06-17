@@ -62,10 +62,60 @@ Para cerrar la sesión, el usuario debe hacer clic en el botón Cerrar Sesión u
 
 ### 6. Solución de problemas comunes
 
-Si al ejecutar npm start aparece un error de conexión a la base de datos, verificar que MariaDB esté corriendo con el comando sudo service mariadb start en WSL o sudo systemctl start mariadb en Linux nativo.
+#### 6.1 Error de conexión a la base de datos
 
-Si la aplicación se abre pero no carga correctamente o muestra un mensaje de API no disponible, verificar que se ejecutó npm install correctamente y que no hay errores en la terminal donde se lanzó el sistema.
+Si al ejecutar npm start la aplicación se abre pero no carga datos o aparece un mensaje de error de conexión, MariaDB no está corriendo. En WSL ejecutar:
 
-Si los emojis no se ven correctamente en la interfaz, instalar las fuentes con sudo apt install fonts-noto-color-emoji y cerrar y volver a abrir la aplicación.
+sudo service mariadb start
 
-Los mensajes de error relacionados con GPU en la terminal como viz_main_impl.cc o command_buffer_proxy_impl.cc son normales en entornos WSL sin aceleración gráfica y no afectan el funcionamiento del sistema.
+En Linux nativo ejecutar:
+
+sudo systemctl start mariadb
+
+Si el error persiste, verificar que MariaDB esté instalado con el comando:
+
+mariadb --version
+
+Si no está instalado, ejecutar:
+
+sudo apt install mariadb-server
+
+#### 6.2 Error de dependencias no instaladas
+
+Si la aplicación se abre pero no carga correctamente o muestra un mensaje de API no disponible, es posible que las dependencias no se hayan instalado. Ejecutar en la raíz del proyecto:
+
+npm install
+
+Si el problema persiste, eliminar la carpeta node_modules y volver a instalar:
+
+rm -rf node_modules && npm install
+
+#### 6.3 Error por archivo .env faltante
+
+Si la aplicación no puede conectar a la base de datos, verificar que el archivo .env exista. Si no existe, copiar el archivo de ejemplo:
+
+cp .env.example .env
+
+El archivo .env contiene la configuración de conexión a MariaDB. Los valores por defecto son: usuario root, sin contraseña, base de datos riego_db.
+
+#### 6.4 Error de API NASA POWER sin conexión a internet
+
+Si el sistema no tiene acceso a internet, la consulta a la API de NASA POWER fallará. Esto no impide que la aplicación funcione: el sistema usará valores por defecto para la evapotranspiración y generará recomendaciones con datos estimados. El mensaje de error solo aparece en la terminal y no afecta al usuario en la interfaz gráfica.
+
+#### 6.5 Mensajes de GPU en la terminal
+
+Los mensajes de error en la terminal como viz_main_impl.cc o command_buffer_proxy_impl.cc son normales en entornos WSL sin aceleración gráfica y no afectan el funcionamiento del sistema. Se pueden ignorar completamente.
+
+#### 6.6 Error de icono de casa o botón Volver
+
+Si aparece un error ERR_FILE_NOT_FOUND en la terminal al iniciar la aplicación, es probable que sea por un botón de casa o Volver a inicio que apuntaba a una ruta incorrecta dentro del proyecto. Este problema ya fue corregido en versiones recientes del sistema. Si el error persiste, actualizar el repositorio con:
+
+git pull origin main
+
+#### 6.7 Emojis no visibles en la interfaz
+
+Si los emojis no se ven correctamente en la interfaz, instalar las fuentes correspondientes con:
+
+sudo apt install fonts-noto-color-emoji
+
+Luego cerrar y volver a abrir la aplicación.
