@@ -4,8 +4,8 @@
   "description": "Sistema Inteligente de Control de Riego - Fase 4 Implementación",
   "main": "src/main.js",
   "scripts": {
-    "start": "npx electron .",
-    "dev": "nodemon --exec electron .",
+    "start": "npx electron . --disable-gpu",
+    "dev": "nodemon --exec 'electron . --disable-gpu'",
     "build": "electron-builder --win",
     "docs": "jsdoc src -d docs/jsdoc",
     "test": "node --test tests/"
