@@ -352,20 +352,6 @@ h1, h2, h3, h4, h5 {
   cursor: not-allowed;
 }
 
-.credential-hint {
-  margin-top: 8px;
-  padding: 8px 0;
-  font-size: 13px;
-  color: var(--gris-500);
-  text-align: center;
-  line-height: 2;
-}
-.credential-hint code {
-  padding: 1px 6px;
-  border-radius: 3px;
-  font-size: 13px;
-  color: var(--verde-bosque);
-}
 
 .login-footer {
   margin-top: 24px;
@@ -662,26 +648,6 @@ h1, h2, h3, h4, h5 {
   gap: 12px;
 }
 
-.btn-home {
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  padding: 8px 14px;
-  border-radius: var(--radio-sm);
-  background: rgba(255,255,255,0.7);
-  border: 1px solid var(--border-color);
-  transition: all 0.2s;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-}
-.btn-home:hover {
-  background: #fff;
-  color: var(--text-primary);
-  border-color: var(--gris-medio);
-}
 
 .main-container {
   padding: 28px 32px;
@@ -1613,9 +1579,5 @@ input[type="number"] {
     font-size: 11px;
   }
 
-  .btn-home {
-    font-size: 13px;
-    padding: 6px 10px;
   }
-}
 
