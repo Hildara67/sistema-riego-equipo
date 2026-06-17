@@ -146,7 +146,8 @@ Ver [`docs/FLUJO_DE_TRABAJO.md`](docs/FLUJO_DE_TRABAJO.md) para más detalle.
 │   ├── init_db.sql              #   Script de base de datos
 │   ├── INFORME.md               #   Informe del proyecto
 │   ├── FLUJO_DE_TRABAJO.md      #   Documentación del flujo de trabajo
-│   └── ARQUITECTURA.md          #   Arquitectura del sistema
+│   ├── ARQUITECTURA.md          #   Arquitectura del sistema
+│   └── manual_usuario.md       #   Manual de usuario
 ├── 📁 tests/                    #   Pruebas unitarias
 ├── 📁 datos/
 │   └── sensores.csv             #   Datos de prueba
